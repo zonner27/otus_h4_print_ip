@@ -14,8 +14,7 @@ find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 add_executable(print_ip
     ${SOURCE_PATH}/main.cpp
-#    ${SOURCE_PATH}/allocator.cpp
-#    ${SOURCE_PATH}/container.cpp
+    ${SOURCE_PATH}/printip.cpp
 )
 
 #add_executable(test_alloc  ${TEST_PATH}/test_alloc.cpp)
