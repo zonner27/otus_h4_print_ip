@@ -1,10 +1,3 @@
-#include <iostream>
-#include <array>
-#include <string>
-#include <cstring>
-#include <vector>
-#include <list>
-#include <tuple>
 #include "printip.h"
 
 int main()

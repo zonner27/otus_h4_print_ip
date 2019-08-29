@@ -7,52 +7,51 @@ endif()
 
 project(print_ip VERSION 0.0.${PATCH_VERSION})
 
+find_package(GTest REQUIRED)
+include_directories(SYSTEM ${GTEST_INCLUDE_DIRS})
+
 set(SOURCE_PATH "${PROJECT_SOURCE_DIR}/src")
 set(TEST_PATH "${PROJECT_SOURCE_DIR}/tests")
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
-add_executable(print_ip
-    ${SOURCE_PATH}/main.cpp
-    ${SOURCE_PATH}/printip.cpp
-)
+add_executable(print_ip ${SOURCE_PATH}/main.cpp)
+add_library(lib_print_ip ${SOURCE_PATH}/printip.cpp)
+add_executable(test_printip  ${TEST_PATH}/gtest.cpp)
 
-#add_executable(test_alloc  ${TEST_PATH}/test_alloc.cpp)
+target_link_libraries(print_ip lib_print_ip)
+find_package(Threads)
+target_link_libraries(test_printip ${GTEST_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} lib_print_ip)
 
 set_target_properties(
     print_ip
-#    test_alloc
+    lib_print_ip
+    test_printip
     PROPERTIES
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
 )
 
-#set_target_properties(
-#    test_alloc
-#    PROPERTIES
-#        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
-#        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-#        INCLUDE_DIRECTORIES ${SOURCE_PATH}
-#)
-
-#target_link_libraries(test_alloc
-#    ${Boost_LIBRARIES}
-#)
+set_target_properties(
+    test_printip
+    PROPERTIES
+        INCLUDE_DIRECTORIES ${SOURCE_PATH}
+)
 
 if (MSVC)
     target_compile_options(print_ip PRIVATE
         /W4
     )
-#    target_compile_options(test_alloc PRIVATE
-#       /W4
-#    )
+    target_compile_options(test_printip PRIVATE
+       /W4
+    )
 else ()
     target_compile_options(print_ip PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-#   target_compile_options(test_alloc PRIVATE
-#       -Wall -Wextra -pedantic -Werror
-#    )
+   target_compile_options(test_printip PRIVATE
+       -Wall -Wextra -pedantic -Werror
+    )
 endif()
 
 install(TARGETS print_ip RUNTIME DESTINATION bin)
@@ -67,8 +66,6 @@ set(CPACK_PACKAGE_CONTACT zonner2785@gmail.com)
 
 include(CPack)
 
-#enable_testing()
+enable_testing()
 
-#add_test(test_container test_alloc)
-#add_test(test_alloc test_alloc)
-
+add_test(NAME test_printip COMMAND test_printip)
