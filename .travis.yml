@@ -1,6 +1,12 @@
 language: cpp
 dist: xenial
-compiler: clang
+compiler: gcc
+
+os: linux
+addons:
+apt:
+sources:
+  - ubuntu-toolchain-r-test
 packages:
   - g++-7
 
