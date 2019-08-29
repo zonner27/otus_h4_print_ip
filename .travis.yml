@@ -1,18 +1,18 @@
 language: cpp
-dist: trusty
+dist: xenial
 compiler: 
   - gcc
   - clang
 
-os: linux
-addons:
-apt:
-sources:
-  - ubuntu-toolchain-r-test
-packages:
-  - g++-7
-env:
-  - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+#os: linux
+#addons:
+#apt:
+#sources:
+#  - ubuntu-toolchain-r-test
+#packages:
+#  - g++-7
+#env:
+#  - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 before_script:
   - sudo apt-get install libgtest-dev -y 
@@ -20,13 +20,13 @@ before_script:
   - sudo apt-get update -qq
 
 before_install:
-  - eval "${MATRIX_EVAL}"
-#  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
-#  - sudo apt-get update -qq
+#  - eval "${MATRIX_EVAL}"
+  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
 
-#install: 
-#  - sudo apt-get install -qq g++-6
-#  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 9
+install: 
+  - sudo apt-get install -qq g++-7
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 9
 
 script:
 #  - export CC=gcc-7
