@@ -47,6 +47,5 @@ deploy:
     skip_cleanup: true
     github_token: $GITHUB_TOKEN
     local-dir: html
-    keep_history: true
     on:
       branch: master
