@@ -1,6 +1,8 @@
 language: cpp
-dist: xenial
-compiler: gcc
+dist: trusty
+compiler: 
+  - gcc
+  - clang
 
 os: linux
 addons:
@@ -9,13 +11,16 @@ sources:
   - ubuntu-toolchain-r-test
 packages:
   - g++-7
+env:
+  - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 before_script:
   - sudo apt-get install libgtest-dev -y 
   - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
   - sudo apt-get update -qq
 
-#before_install:
+before_install:
+  - eval "${MATRIX_EVAL}"
 #  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
 #  - sudo apt-get update -qq
 
@@ -24,9 +29,9 @@ before_script:
 #  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 9
 
 script:
-  - export CC=gcc-7
-  - export CXX=g++-7
-  - cmake --version
+#  - export CC=gcc-7
+#  - export CXX=g++-7
+#  - cmake --version
   - PATH1=${PWD}
   - mkdir ~/googletest
   - cd ~/googletest
