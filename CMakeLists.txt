@@ -13,8 +13,6 @@ include_directories(SYSTEM ${GTEST_INCLUDE_DIRS})
 set(SOURCE_PATH "${PROJECT_SOURCE_DIR}/src")
 set(TEST_PATH "${PROJECT_SOURCE_DIR}/tests")
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
-
 add_executable(print_ip ${SOURCE_PATH}/main.cpp)
 add_library(lib_print_ip ${SOURCE_PATH}/printip.cpp)
 add_executable(test_printip  ${TEST_PATH}/gtest.cpp)
