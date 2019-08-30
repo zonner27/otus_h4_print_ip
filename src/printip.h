@@ -9,7 +9,11 @@
 #include <list>
 #include <tuple>
 
-
+/*!
+*    Функция print_ip выводит в поток oustream ip-адрес переданный в качестве параметра
+*    \param T integral type
+*    \param out Выходной поток
+*/
 template <typename T>
 decltype(std::cout << std::declval<T>(), void())
 print_ip(T value, std::ostream& out)
@@ -23,11 +27,21 @@ print_ip(T value, std::ostream& out)
     out << std::endl;
 }
 
+/*!
+*    Функция print_ip выводит в поток oustream ip-адрес переданный в качестве параметра
+*    \param T string type
+*    \param out Выходной поток
+*/
 void print_ip(std::string value, std::ostream& out)
 {
     out << value << std::endl;
 }
 
+/*!
+*    Функция print_ip выводит в поток oustream ip-адрес переданный в качестве параметра
+*    \param T container type
+*    \param out Выходной поток
+*/
 template <typename T>
 decltype(begin(std::declval<T>()), end(std::declval<T>()), void())
 print_ip(T container, std::ostream& out)
@@ -42,6 +56,11 @@ print_ip(T container, std::ostream& out)
     out << std::endl;
 }
 
+/*!
+*    Функция print_ip выводит в поток oustream ip-адрес переданный в качестве параметра
+*    \param T tuple type
+*    \param out Выходной поток
+*/
 template<typename... Args>
 void print_ip(std::tuple<Args...> T, std::ostream& out)
 {
