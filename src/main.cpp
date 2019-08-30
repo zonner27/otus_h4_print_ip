@@ -1,7 +1,7 @@
 #include "printip.h"
 
 /*!
-*    \mainpaget
+*    \mainpage
 *    \brief Программа печати условного ip-адреса
 *    \author Ivan Z
 *    \version 1.0
