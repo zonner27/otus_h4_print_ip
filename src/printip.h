@@ -32,7 +32,7 @@ print_ip(T value, std::ostream& out)
 *    \param T string type
 *    \param out Выходной поток
 */
-void print_ip(std::string value, std::ostream& out)
+void print_ip(const std::string &value, std::ostream& out)
 {
     out << value << std::endl;
 }
@@ -44,7 +44,7 @@ void print_ip(std::string value, std::ostream& out)
 */
 template <typename T>
 decltype(begin(std::declval<T>()), end(std::declval<T>()), void())
-print_ip(T container, std::ostream& out)
+print_ip(const T &container, std::ostream& out)
 {
     for (auto it = std::begin(container); it != std::end(container); ++it)
         {
@@ -64,11 +64,9 @@ print_ip(T container, std::ostream& out)
 template<typename... Args>
 void print_ip(std::tuple<Args...> T, std::ostream& out)
 {
-    // т.к. все элементы tuple одного типа
-    using mytype = typename std::tuple_element<0,decltype(T)>::type;
-    std::vector<mytype> tmp;
-    std::apply([&tmp](auto&&... args) {((tmp.push_back(args)), ...);}, T);
-    print_ip(tmp, out);
+    bool i = 0;
+    std::apply([&i, &out](auto&&... args) {(((i == 0 ? out << args : out << "." << args), i = 1), ...);}, T);
+    out << std::endl;
 }
 
 

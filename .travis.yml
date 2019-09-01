@@ -18,7 +18,6 @@ install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 9
 
 script:
-  - PATH1=${PWD}
   - mkdir ~/googletest
   - cd ~/googletest
   - wget https://github.com/google/googletest/archive/release-1.8.1.tar.gz
@@ -29,8 +28,7 @@ script:
   - sudo cp -a ./googletest/include/gtest /usr/include
   - sudo cp -a ./googlemock/gtest/libgtest.a /usr/lib
   - sudo cp -a ./googlemock/gtest/libgtest_main.a /usr/lib
-  - cd $PATH1
-  - pwd
+  - cd $TRAVIS_BUILD_DIR
   - cmake .
   - cmake --build .
   - cmake --build . --target test

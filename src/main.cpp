@@ -40,7 +40,7 @@ int main()
         print_ip(std::string("192.168.1.1"), std::cout);
         print_ip(std::vector<int>{1, 2, 3, 4}, std::cout);
         print_ip(std::list<char>{5, 6, 7, 8}, std::cout);
-        print_ip(std::make_tuple(long(11), long(10), long(13), long(15)), std::cout);
+        print_ip(std::make_tuple(long(9), long(10), long(11), long(12)), std::cout);
 
     } catch (std::exception& e)
     {
